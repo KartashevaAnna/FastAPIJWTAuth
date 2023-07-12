@@ -26,7 +26,8 @@ def read_root() -> dict:
 
 def check_user(data: UserLoginSchema):
     user = db.session.query(User).filter_by(email=data.email).one()
-    if user.email == data.email:
+    hashed_password = str(bcrypt.hashpw(data.password.encode("utf-8"), SALT))
+    if user.email == data.email and user.password == hashed_password:
         return True
     return False
 
@@ -34,7 +35,7 @@ def check_user(data: UserLoginSchema):
 @app.post("/user/login", tags=["user"])
 async def user_login(user: UserLoginSchema = Body(...)):
     if check_user(user):
-        return JWT_signature(user.id)
+        return JWT_signature(user.email)
     return {"error": "Wrong login details!"}
 
 
@@ -47,7 +48,7 @@ async def user(user: UserInSchema = Body(...)):
         db_user = User(
             name=user.name,
             email=user.email,
-            password=hashed_password,
+            password=str(hashed_password),
         )
         db.session.add(db_user)
         db.session.commit()
@@ -64,6 +65,13 @@ async def user():
     users = db.session.query(User).all()
     return users
 
+@app.post("/users/", tags=["user"], summary="delete all users")
+async def user():
+    users = db.session.query(User).all()
+    for user in users:
+        db.session.delete(user)
+    db.session.commit()
+    return 200
 
 @app.post(
     "/post",
