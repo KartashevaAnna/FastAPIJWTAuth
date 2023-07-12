@@ -1,7 +1,6 @@
 import os
-
 import bcrypt
-import psycopg2
+
 from dotenv import load_dotenv
 from fastapi import Body, Depends, FastAPI, HTTPException
 from fastapi_sqlalchemy import DBSessionMiddleware, db
@@ -65,6 +64,7 @@ async def user():
     users = db.session.query(User).all()
     return users
 
+
 @app.post("/users/", tags=["user"], summary="delete all users")
 async def user():
     users = db.session.query(User).all()
@@ -73,9 +73,11 @@ async def user():
     db.session.commit()
     return 200
 
+
 @app.post(
     "/post",
     response_model=PostSchema,
+    dependencies=[Depends(JWTBearer())],
     tags=["posts"],
     summary="Add a post",
 )
@@ -86,7 +88,12 @@ async def add_post(post: PostSchema) -> dict:
     return db_post
 
 
-@app.get("/posts", tags=["posts"], summary="Show all posts")
+@app.get(
+    "/posts",
+    dependencies=[Depends(JWTBearer())],
+    tags=["posts"],
+    summary="Show all posts",
+)
 async def book():
     posts = db.session.query(Post).all()
     return posts
@@ -101,7 +108,12 @@ def show_post(post_id: int):
     return db_post
 
 
-@app.post('/post/{post_id}', tags=["posts"], summary="Delete a post")
+@app.post(
+    "/post/{post_id}",
+    dependencies=[Depends(JWTBearer())],
+    tags=["posts"],
+    summary="Delete a post",
+)
 async def remove_post(post_id):
     db_post = db.session.query(Post).filter_by(id=post_id).one()
     db.session.delete(db_post)
@@ -109,7 +121,13 @@ async def remove_post(post_id):
     return 200
 
 
-@app.patch("/post/{post_id}", response_model=PostSchema, tags=["posts"], summary='Update a post')
+@app.patch(
+    "/post/{post_id}",
+    response_model=PostSchema,
+    dependencies=[Depends(JWTBearer())],
+    tags=["posts"],
+    summary="Update a post",
+)
 def update_post(post_id: int, post_to_change: PostSchema):
     db_post = db.session.get(Post, post_id)
     if not db_post:
