@@ -6,7 +6,7 @@ from fastapi_sqlalchemy import db
 from app.auth.auth_bearer import JWTBearer
 from app.dependencies import get_user_name_from_token
 from app.models import Post
-from app.schema import PostSchema
+from app.schemas.post import PostSchema
 from app.schemas.user import UserOutSchema
 
 posts_router = APIRouter(
