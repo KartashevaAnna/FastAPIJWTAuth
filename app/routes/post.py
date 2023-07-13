@@ -30,13 +30,16 @@ async def get_posts(user: Annotated[UserOutSchema, Depends(get_user_name_from_to
     summary="Add a post",
 )
 async def add_post(post: PostSchema) -> dict:
-    db_post = Post(title=post.title, text=post.text, author_id=post.author_id)
+    db_post = Post(title=post.title, text=post.text, user_id=post.user_id)
     db.session.add(db_post)
     db.session.commit()
     return db_post
 
 
-@posts_router.get("/post/{post_id}", summary="Show a post",)
+@posts_router.get(
+    "/post/{post_id}",
+    summary="Show a post",
+)
 def show_post(post_id: int):
     db_post = db.session.query(Post).filter_by(id=post_id).one_or_none()
     if not db_post:

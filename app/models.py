@@ -11,8 +11,8 @@ class Post(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     text = Column(String)
-    author_id = Column(Integer, ForeignKey("user.id"))
-    author = relationship("User")
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship("User")
 
 
 class User(Base):
@@ -21,3 +21,12 @@ class User(Base):
     email = Column(String, unique=True)
     password = Column(String)
 
+
+class Like(Base):
+    __tablename__ = "like"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("user.id"))
+    post_id = Column(Integer, ForeignKey("post.id"))
+
+    user = relationship("User")
+    post = relationship("Post")

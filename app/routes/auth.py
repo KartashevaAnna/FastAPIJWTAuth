@@ -11,9 +11,7 @@ auth_router = APIRouter(prefix="/api/v1", tags=["Auth"])
 SALT = b"$2b$12$b6HezbZpslamxu5/wv8UU."
 
 
-@auth_router.post(
-    "/user/signup", response_model=UserOutSchema, summary="Add new user"
-)
+@auth_router.post("/user/signup", response_model=UserOutSchema, summary="Add new user")
 async def user(user: UserInSchema = Body(...)):
     try:
         hashed_password = bcrypt.hashpw(user.password.encode("utf-8"), SALT)
