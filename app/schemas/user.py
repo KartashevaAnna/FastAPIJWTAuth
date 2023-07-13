@@ -9,7 +9,6 @@ from pydantic import BaseModel, EmailStr, Field
 
 
 class UserInSchema(BaseModel):
-    name: str
     email: EmailStr
     password: str
 
@@ -17,7 +16,6 @@ class UserInSchema(BaseModel):
         from_attributes = True
         json_schema_extra = {
             "example": {
-                "name": "Anna",
                 "email": "annakartashevamail@gmail.com",
                 "password": "anypassword",
             }
@@ -25,7 +23,6 @@ class UserInSchema(BaseModel):
 
 
 class UserOutSchema(BaseModel):
-    name: str
     email: EmailStr
 
 

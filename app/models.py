@@ -10,9 +10,7 @@ class Post(Base):
     __tablename__ = "post"
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
-    content = Column(String)
-    time_created = Column(DateTime(timezone=True), server_default=func.now())
-    time_updated = Column(DateTime(timezone=True), onupdate=func.now())
+    text = Column(String)
     author_id = Column(Integer, ForeignKey("user.id"))
     author = relationship("User")
 
@@ -20,8 +18,6 @@ class Post(Base):
 class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
-    name = Column(String)
     email = Column(String, unique=True)
     password = Column(String)
-    time_created = Column(DateTime(timezone=True), server_default=func.now())
-    time_updated = Column(DateTime(timezone=True), onupdate=func.now())
+

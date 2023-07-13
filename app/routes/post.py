@@ -30,7 +30,7 @@ async def get_posts(user: Annotated[UserOutSchema, Depends(get_user_name_from_to
     summary="Add a post",
 )
 async def add_post(post: PostSchema) -> dict:
-    db_post = Post(title=post.title, content=post.content, author_id=post.author_id)
+    db_post = Post(title=post.title, text=post.text, author_id=post.author_id)
     db.session.add(db_post)
     db.session.commit()
     return db_post

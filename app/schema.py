@@ -1,9 +1,9 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
 
 
 class PostSchema(BaseModel):
     title: str = Field(...)
-    content: str = Field(...)
+    text: str = Field(...)
     author_id: int
 
     class Config:

@@ -18,7 +18,6 @@ async def user(user: UserInSchema = Body(...)):
     try:
         hashed_password = bcrypt.hashpw(user.password.encode("utf-8"), SALT)
         db_user = User(
-            name=user.name,
             email=user.email,
             password=str(hashed_password),
         )
