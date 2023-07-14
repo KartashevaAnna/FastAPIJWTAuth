@@ -1,11 +1,12 @@
 from pydantic import BaseModel, EmailStr, Field
 
-# class UserSchema(BaseModel):
-#     email: EmailStr
-#
-#
-# class UserFullSchema(UserSchema):
-#     password: str
+
+class UserSchema(BaseModel):
+    email: EmailStr
+
+
+class UserFullSchema(UserSchema):
+    password: str
 
 
 class UserInSchema(BaseModel):
