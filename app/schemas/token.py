@@ -14,7 +14,7 @@ class TokenPayloadSchema(BaseModel):
     def token_expiry(self) -> str:
         return (
             datetime.datetime.utcnow() + datetime.timedelta(hours=TOKEN_LIFETIME)
-        ).isoformat()
+        ).strftime('%Y-%m-%d %H:%M:%S%z')
 
 
 class TokenSchema(BaseModel):

@@ -4,7 +4,6 @@ from pydantic import BaseModel, Field
 class PostSchema(BaseModel):
     title: str = Field(...)
     text: str = Field(...)
-    user_id: int
 
     class Config:
         from_attributes = True
@@ -40,6 +39,5 @@ class PostSchema(BaseModel):
                 "warmer. Is this the best we can do can't you just take a picture from the internet? could "
                 "you move it a tad to the left we need to make the new version clean and sexy we are a "
                 "non-profit organization.",
-                "user_id": "1",
             }
         }

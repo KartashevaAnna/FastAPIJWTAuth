@@ -1,4 +1,4 @@
-import time
+import datetime
 
 import bcrypt
 import jwt
@@ -28,9 +28,10 @@ def is_user_in_db(credentials: UserFullSchema):
     )
 
 
-def decode_jwt(token: str) -> dict:
-    try:
-        decoded_token = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        return decoded_token if decoded_token["expires"] >= time.time() else None
-    except:
-        return {}
+def decode_token(token: str) -> dict:
+    return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+
+
+def is_token_expired(token: str) -> bool:
+    token_expiry: str = decode_token(token).get("token_expiry")
+    return datetime.datetime.strptime(token_expiry, '%Y-%m-%d %H:%M:%S') >= datetime.datetime.now()

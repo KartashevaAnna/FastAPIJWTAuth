@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr
 
 
 class UserSchema(BaseModel):
@@ -8,30 +8,8 @@ class UserSchema(BaseModel):
 class UserFullSchema(UserSchema):
     password: str
 
-
-class UserInSchema(BaseModel):
-    email: EmailStr
-    password: str
-
     class Config:
         from_attributes = True
-        json_schema_extra = {
-            "example": {
-                "email": "annakartashevamail@gmail.com",
-                "password": "anypassword",
-            }
-        }
-
-
-class UserOutSchema(BaseModel):
-    email: EmailStr
-
-
-class UserLoginSchema(BaseModel):
-    email: EmailStr = Field(...)
-    password: str = Field(...)
-
-    class Config:
         json_schema_extra = {
             "example": {
                 "email": "annakartashevamail@gmail.com",

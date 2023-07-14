@@ -1,6 +1,6 @@
 UNIVERSAL_401 = {
     "401": {
-        "description": "Unauthorized (token is missing or expired)",
+        "description": "Invalid credentials",
     }
 }
 
