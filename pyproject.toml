@@ -21,6 +21,7 @@ bcrypt = "^4.0.1"
 alembic = "^1.11.1"
 psycopg2 = "^2.9.6"
 python-multipart = "^0.0.6"
+loguru = "^0.7.0"
 
 
 [build-system]

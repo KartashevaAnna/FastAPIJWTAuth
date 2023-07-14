@@ -4,7 +4,7 @@ from fastapi import Depends, Header
 from fastapi_sqlalchemy import db
 
 from app.auth.auth_handler import decode_JWT
-from app.models import User
+from app.models.user import User
 
 
 def get_token_from_header(authorization: Annotated[str | None, Header()] = None) -> str:

@@ -1,16 +1,16 @@
 """initial migration
 
-Revision ID: 3339176d0fb9
+Revision ID: 71abf9edb8b0
 Revises: 
-Create Date: 2023-07-13 21:57:07.243881
+Create Date: 2023-07-14 15:53:17.106636
 
 """
-from alembic import op
 import sqlalchemy as sa
 
+from alembic import op
 
 # revision identifiers, used by Alembic.
-revision = "3339176d0fb9"
+revision = "71abf9edb8b0"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,17 +21,18 @@ def upgrade() -> None:
     op.create_table(
         "user",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("email", sa.String(), nullable=True),
-        sa.Column("password", sa.String(), nullable=True),
+        sa.Column("email", sa.String(), nullable=False),
+        sa.Column("password", sa.String(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("email"),
+        sa.UniqueConstraint("id"),
     )
     op.create_table(
         "post",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("title", sa.String(), nullable=True),
-        sa.Column("text", sa.String(), nullable=True),
-        sa.Column("user_id", sa.Integer(), nullable=True),
+        sa.Column("title", sa.String(), nullable=False),
+        sa.Column("text", sa.String(), nullable=False),
+        sa.Column("user_id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
             ["user_id"],
             ["user.id"],
@@ -42,8 +43,9 @@ def upgrade() -> None:
     op.create_table(
         "like",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("user_id", sa.Integer(), nullable=True),
-        sa.Column("post_id", sa.Integer(), nullable=True),
+        sa.Column("user_id", sa.Integer(), nullable=False),
+        sa.Column("post_id", sa.Integer(), nullable=False),
+        sa.Column("is_like", sa.Boolean(), nullable=True),
         sa.ForeignKeyConstraint(
             ["post_id"],
             ["post.id"],

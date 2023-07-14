@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi_sqlalchemy import db
 
-from app.models import User
+from app.models.user import User
 
 users_router = APIRouter(prefix="/api/v1", tags=["Users"])
 
