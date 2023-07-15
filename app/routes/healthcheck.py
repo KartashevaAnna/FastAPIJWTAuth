@@ -7,3 +7,4 @@ ping_router = APIRouter(tags=["Healthcheck"])
 def health_check() -> str:
     """Checks that the app is running. Returns Pong for Ping."""
     return "Pong!"
+

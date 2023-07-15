@@ -39,6 +39,10 @@ def build_app(logger) -> fastapi.FastAPI:
     app.include_router(ping_router)
     app.include_router(likes_router)
 
+    @app.get("/")
+    async def root():
+        return {"message": "Hello World"}
+
     if config.DEBUG:
         app.include_router(users_router)
 
@@ -47,8 +51,10 @@ def build_app(logger) -> fastapi.FastAPI:
 
 def main():
     logger = setup_logging(loguru.logger)
-    uvicorn.run(build_app(logger), host="0.0.0.0", port=64049)
+    uvicorn.run(build_app(logger), host="0.0.0.0", port=8000)
 
 
 if __name__ == "__main__":
     main()
+
+
