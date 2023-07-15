@@ -9,6 +9,7 @@ from fastapi_sqlalchemy import DBSessionMiddleware
 import config
 from app.routes.auth import auth_router
 from app.routes.healthcheck import ping_router
+from app.routes.like import likes_router
 from app.routes.post import posts_router
 from app.routes.user import users_router
 from utils.logger import setup_logging
@@ -36,6 +37,7 @@ def build_app(logger) -> fastapi.FastAPI:
     app.include_router(posts_router)
     app.include_router(auth_router)
     app.include_router(ping_router)
+    app.include_router(likes_router)
 
     if config.DEBUG:
         app.include_router(users_router)
