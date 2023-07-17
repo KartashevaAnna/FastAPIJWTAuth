@@ -32,7 +32,7 @@ def build_app(logger) -> fastapi.FastAPI:
     if not config.DEBUG:
         app.docs_url = app.redoc_url = app.openapi_url = None
 
-    app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
+    app.add_middleware(DBSessionMiddleware, db_url=config.DATABASE_URL)
 
     app.include_router(posts_router)
     app.include_router(auth_router)

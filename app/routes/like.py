@@ -7,9 +7,7 @@ from app.auth.auth_bearer import JWTBearer
 from app.models.like import Like
 from app.models.post import Post
 from app.models.user import User
-from app.schemas.like import LikeSchema, LikeCreateSchema
-from app.schemas.post import PostSchema
-from app.schemas.user import UserFullSchema
+from app.schemas.like import LikeCreateSchema
 from utils.dependencies import get_user_from_token
 
 likes_router = APIRouter(

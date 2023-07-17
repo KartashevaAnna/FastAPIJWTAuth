@@ -23,7 +23,7 @@ app = fastapi.FastAPI(
     redoc_url="/api/v1/redoc",
     debug=config.DEBUG)
 
-app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
+app.add_middleware(DBSessionMiddleware, db_url=config.DATABASE_URL)
 
 app.include_router(posts_router)
 app.include_router(auth_router)

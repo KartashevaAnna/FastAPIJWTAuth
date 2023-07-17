@@ -1,8 +1,14 @@
-FROM python:3.11
+FROM python:3.11-slim
+
 WORKDIR /fastapi
 COPY requirements.txt /fastapi
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-COPY . /fastapi
+RUN apt-get update
 
-CMD ["uvicorn", "docker_app:app", "--host", "0.0.0.0", "--port", "80"]
+RUN pip install -r requirements.txt
+
+
+COPY .. /fastapi
+COPY app /fastapi
+
+
+#CMD ["uvicorn", "docker_run:app", "--host", "0.0.0.0", "--port", "80"]

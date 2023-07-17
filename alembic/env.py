@@ -6,10 +6,9 @@ from logging.config import fileConfig
 from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
 
+import app
 from alembic import context
-from app.models.like import Like
-from app.models.post import Post
-from app.models.user import User
+from app.models import Base
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
@@ -21,20 +20,17 @@ sys.path.append(BASE_DIR)
 config = context.config
 
 #  Making a connection
-config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
+config.set_main_option("sqlalchemy.url", config.DATABASE_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
 
-
-import app.models
-
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = app.models.Base.metadata
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
