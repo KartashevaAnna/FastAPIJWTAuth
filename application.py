@@ -39,10 +39,6 @@ def build_app(logger) -> fastapi.FastAPI:
     app.include_router(ping_router)
     app.include_router(likes_router)
 
-    @app.get("/")
-    async def root():
-        return {"message": "Hello World"}
-
     if config.DEBUG:
         app.include_router(users_router)
 
@@ -56,5 +52,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
