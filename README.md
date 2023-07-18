@@ -21,5 +21,5 @@
 - Отдать команду применить миграции (```alembic upgrade head```)
 - Запустить приложение локально (```python application.py```)
 
-Healthcheck доступен здесь: http://localhost:8000/ping
+Healthcheck доступен здесь: http://localhost:8000/ping <p>
 Документация здесь: http://localhost:8000/api/v1/docs
