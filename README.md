@@ -15,7 +15,7 @@
 ## Установка:
 - Скопировать проект с гитхаб
 - Создать и активировать виртуальную среду
-- Установить зависимости (```pip install -r requirements.txt``` либо через poetry)
+- Установить зависимости (```pip install -r requirements.txt``` либо через ```poetry install```)
 - Подключить базу Postgres (название базы: jwtblog)
 - Создать файл .env и добавить в него DATABASE_URL (```DATABASE_URL='postgresql://postgres:anna@localhost/jwt_blog'```)
 - Отдать команду применить миграции (```alembic upgrade head```)
